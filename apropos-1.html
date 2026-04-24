@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="L'histoire vraie de BabyEL — Mourad El Melouli et Fatima El Ouafi, jeunes parents belges, et leur galère avec leur premier enfant."/>
+  <title>Notre histoire — BabyEL</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .timeline { position: relative; max-width: 700px; margin: 0 auto; }
+    .timeline::before { content:""; position:absolute; left:24px; top:0; bottom:0; width:2px; background:var(--green-pale); }
+    .tl-item { display:flex; gap:var(--s3); align-items:flex-start; margin-bottom:var(--s4); position:relative; }
+    .tl-dot { width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,var(--green-light),var(--green-deep)); display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; z-index:1; box-shadow:0 0 0 4px var(--sand); }
+    .tl-content { background:var(--white); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s3); flex:1; }
+    .tl-date { font-size:.8rem; font-weight:700; color:var(--green-mid); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.3rem; }
+    .tl-content h3 { font-family:var(--font-body); font-size:1.05rem; font-weight:700; margin-bottom:.4rem; }
+    .tl-content p { font-size:.93rem; color:var(--text-mid); max-width:100%; margin:0; }
+    .founders-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--s4); margin-top:var(--s4); }
+    .founder-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s4); text-align:center; }
+    .founder-avatar { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,var(--green-light),var(--peach)); display:flex; align-items:center; justify-content:center; font-size:3rem; margin:0 auto var(--s2); border:3px solid var(--border); }
+    .founder-name { font-family:var(--font-display); font-size:1.4rem; margin-bottom:.2rem; }
+    .founder-role { font-size:.85rem; font-weight:700; color:var(--green-deep); margin-bottom:var(--s2); }
+    .founder-bio { font-size:.9rem; color:var(--text-mid); max-width:100%; margin:0; }
+    .quote-pull { background:linear-gradient(135deg,var(--green-deep),var(--green-mid)); color:white; border-radius:var(--r-xl); padding:var(--s5) var(--s4); text-align:center; position:relative; overflow:hidden; }
+    .quote-pull::before { content:'"'; font-family:var(--font-display); font-size:12rem; color:rgba(255,255,255,.07); position:absolute; top:-2rem; left:1rem; line-height:1; pointer-events:none; }
+    .quote-text { font-family:var(--font-display); font-size:clamp(1.2rem,3vw,1.9rem); line-height:1.4; color:white; position:relative; max-width:100%; margin:0 auto var(--s2); }
+    .quote-attr { font-size:.9rem; opacity:.8; color:white; }
+    @media(max-width:600px){ .founders-grid{grid-template-columns:1fr;} .tl-item{flex-direction:column;} .timeline::before{display:none;} }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<div class="quick-links" role="navigation" aria-label="Raccourcis rapides">
+  <a href="index.html"    class="quick-link">🏠 Accueil</a>
+  <a href="annonces.html" class="quick-link">🛒 Annonces</a>
+  <a href="publier.html"  class="quick-link">📸 Publier</a>
+  <a href="forum.html"    class="quick-link">💬 Forum</a>
+  <a href="contact.html"  class="quick-link">✉️ Contact</a>
+</div>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="BabyEL — Retour à l'accueil">
+      <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+      <span class="logo-text">BabyEL</span>
+    </a>
+    <button class="burger-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="annonces.html">Annonces</a>
+      <a href="forum.html">Forum</a>
+      <a href="apropos.html" class="active" aria-current="page">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="publier.html" class="btn-nav">+ Publier</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <ol>
+    <li><a href="index.html">Accueil</a></li>
+    <li><span aria-current="page">À propos</span></li>
+  </ol>
+</nav>
+
+<main id="main-content">
+
+  <div class="page-header">
+    <h1>Notre histoire</h1>
+    <p>Tout a commencé par une liste de naissance, un appartement trop petit, et beaucoup trop de factures.</p>
+  </div>
+
+  <!-- INTRO STORY -->
+  <section style="background:var(--white);" aria-labelledby="story-intro">
+    <div class="container" style="max-width:800px; text-align:center;">
+      <span class="eco-badge" style="margin-bottom:var(--s3); display:inline-flex;">🌿 Une histoire vraie, belge, et très humaine</span>
+      <h2 id="story-intro" style="margin-bottom:var(--s3);">
+        On n'a pas créé BabyEL parce qu'on avait une idée de startup.<br>
+        On l'a créé parce qu'on avait <em style="color:var(--green-mid);">vraiment galéré.</em>
+      </h2>
+      <p style="font-size:1.1rem; color:var(--text-mid); max-width:100%;">
+        Mourad et Fatima, parents d'une petite fille née en Belgique, ont vécu de l'intérieur ce que 
+        vivent des milliers de jeunes familles : l'excitation de l'arrivée d'un bébé, suivie très vite 
+        par le choc financier et l'accumulation de matériel qui ne sert que quelques semaines.
+      </p>
+      <p style="font-size:1.1rem; color:var(--text-mid); max-width:100%;">
+        BabyEL est née de cette expérience — pas d'un incubateur, pas d'un PowerPoint. 
+        D'une vraie nuit blanche, d'un vrai budget serré, et d'une vraie conviction que les choses 
+        pouvaient être différentes.
+      </p>
+    </div>
+  </section>
+
+  <!-- TIMELINE HISTOIRE -->
+  <section style="background:var(--sand);" aria-labelledby="timeline-h2">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="timeline-h2">Du premier bébé à BabyEL</h2>
+        <p>L'histoire, étape par étape.</p>
+      </div>
+      <div class="timeline" role="list" aria-label="Chronologie de BabyEL">
+
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot" aria-hidden="true">💡</div>
+          <div class="tl-content">
+            <p class="tl-date">La grossesse</p>
+            <h3>La liste de naissance qui fait peur</h3>
+            <p>
+              Quand Fatima tombe enceinte, ils commencent la liste de naissance comme tout le monde — 
+              avec enthousiasme. Très vite, le total dépasse les 2 000 €. Baignoire, table à langer, 
+              transat, poussette, cosy, body taille naissance, pyjamas… 
+              "On pensait vraiment qu'on avait besoin de tout ça," raconte Mourad. 
+              "On était jeunes parents, on ne savait pas encore."
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot" aria-hidden="true">👶</div>
+          <div class="tl-content">
+            <p class="tl-date">Les premiers mois</p>
+            <h3>La réalité frappe fort</h3>
+            <p>
+              Leur fille naît. La joie est immense. Et puis vient le moment du bilan : 
+              la baignoire a servi 3 mois. Les bodys taille naissance, 6 semaines. 
+              Le transat, 4 mois. Des centaines d'euros partis en quelques saisons. 
+              Dans un coin du salon s'accumulent des articles quasi neufs dont leur bébé 
+              a déjà grandi. Pendant ce temps, une amie cherche exactement ces mêmes articles 
+              et ne sait pas où les trouver autrement qu'en payant plein pot dans les grandes surfaces.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot" aria-hidden="true">😤</div>
+          <div class="tl-content">
+            <p class="tl-date">La frustration</p>
+            <h3>"Il doit bien exister un endroit pour ça"</h3>
+            <p>
+              Ils cherchent des plateformes de revente adaptées aux articles bébé en Belgique. 
+              Il y a des sites généralistes, des groupes Facebook dispersés, des marchés ponctuels. 
+              Rien de centralisé, rien de pensé vraiment pour les parents, rien qui donne confiance.
+              "On avait des lots entiers d'articles impeccables à céder, 
+              et on ne savait pas à qui les donner sans perte totale," dit Fatima. 
+              "C'est là qu'on a compris qu'on pouvait créer cet espace nous-mêmes."
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot" aria-hidden="true">🌱</div>
+          <div class="tl-content">
+            <p class="tl-date">La conviction</p>
+            <h3>L'idée BabyEL prend forme</h3>
+            <p>
+              Mourad et Fatima réalisent que leur vécu n'est pas une exception — 
+              c'est la norme pour des milliers de jeunes parents. 
+              Ils décident de construire ce qu'ils auraient voulu trouver : 
+              une plateforme simple, gratuite, solidaire, ancrée en Belgique et ouverte à la France, 
+              avec une vraie dimension éco-responsable. 
+              Pas juste un site de petites annonces : un espace de confiance entre parents.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot" aria-hidden="true">🚀</div>
+          <div class="tl-content">
+            <p class="tl-date">Aujourd'hui</p>
+            <h3>BabyEL — Le début d'une longue aventure</h3>
+            <p>
+              BabyEL est en ligne. Le site que vous visitez est la première version d'une plateforme 
+              pensée pour durer. Mourad et Fatima y travaillent avec rigueur, en prenant le temps 
+              de bien faire les choses. Dans 3 ans, ils veulent que BabyEL soit <em>la</em> référence 
+              de la revente bébé en Belgique et en France — construite sur la confiance, la communauté, 
+              et un engagement écologique concret.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section style="padding: var(--s5) var(--s3); background:var(--white);">
+    <div class="container" style="max-width:800px;">
+      <blockquote class="quote-pull">
+        <p class="quote-text">
+          "On voulait juste créer ce qu'on aurait aimé trouver quand notre fille est née. 
+          Un endroit simple, honnête, où les parents s'entraident vraiment."
+        </p>
+        <footer class="quote-attr">— Fatima El Ouafi, co-fondatrice de BabyEL</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- FONDATEURS -->
+  <section style="background:var(--sand);" aria-labelledby="founders-h2">
+    <div class="container" style="max-width:800px;">
+      <div class="section-title">
+        <h2 id="founders-h2">Les fondateurs</h2>
+        <p>Deux parents. Une vision. Beaucoup de détermination.</p>
+      </div>
+      <div class="founders-grid">
+        <div class="founder-card">
+          <div class="founder-avatar" role="img" aria-label="Portrait de Mourad El Melouli">👨</div>
+          <h3 class="founder-name">Mourad El Melouli</h3>
+          <p class="founder-role">Co-fondateur — Développement &amp; Stratégie</p>
+          <p class="founder-bio">
+            Papa d'une petite fille, basé en Belgique. 
+            C'est lui qui a eu l'idée de transformer la frustration parentale en projet concret. 
+            Il pilote le développement du site et la vision à long terme de BabyEL.
+          </p>
+        </div>
+        <div class="founder-card">
+          <div class="founder-avatar" role="img" aria-label="Portrait de Fatima El Ouafi">👩</div>
+          <h3 class="founder-name">Fatima El Ouafi</h3>
+          <p class="founder-role">Co-fondatrice — Communauté &amp; Expérience utilisateur</p>
+          <p class="founder-bio">
+            Maman au quotidien, voix de la communauté BabyEL. 
+            C'est elle qui s'assure que la plateforme reste accueillante, bienveillante, 
+            et vraiment utile pour les parents — surtout les plus en difficulté.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALEURS -->
+  <section style="background:var(--green-pale);" aria-labelledby="values-h2">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="values-h2">Ce en quoi on croit</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card" style="background:var(--white);">
+          <div class="card-icon" aria-hidden="true">🌿</div>
+          <h3>Éco-responsabilité</h3>
+          <p>Un article bébé qui circule au lieu d'être jeté, c'est une victoire écologique concrète. Pas un slogan.</p>
+        </div>
+        <div class="card" style="background:var(--white);">
+          <div class="card-icon" aria-hidden="true">💚</div>
+          <h3>Solidarité réelle</h3>
+          <p>Pas de commission, pas de frais. Les familles qui ont trop, celles qui manquent — on les met en contact.</p>
+        </div>
+        <div class="card" style="background:var(--white);">
+          <div class="card-icon" aria-hidden="true">🏗️</div>
+          <h3>Construire dans la durée</h3>
+          <p>BabyEL n'est pas pressé. On construit quelque chose de solide, de confiance, qui durera des années.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" aria-labelledby="cta-h2">
+    <div class="container" style="max-width:700px; text-align:center;">
+      <h2 id="cta-h2">Faites partie de l'histoire depuis le début</h2>
+      <p>Chaque parent qui publie sa première annonce ou pose sa première question dans le forum, c'est une brique de BabyEL.</p>
+      <div class="hero-actions">
+        <a href="publier.html" class="btn btn-peach">Publier une annonce</a>
+        <a href="forum.html" class="btn btn-secondary" style="border-color:white;color:white;">Rejoindre le forum</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo" aria-label="BabyEL accueil">
+        <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+        <span class="logo-text">BabyEL</span>
+      </a>
+      <p class="footer-desc">Plateforme éco-solidaire de revente d'articles bébé entre parents.<br>Fondée par Mourad El Melouli &amp; Fatima El Ouafi — Belgique.</p>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="annonces.html">Annonces</a></li><li><a href="forum.html">Forum</a></li><li><a href="apropos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Catégories</h4><ul><li><a href="annonces.html">Vêtements</a></li><li><a href="annonces.html">Mobilier</a></li><li><a href="annonces.html">Jeux &amp; Éveil</a></li><li><a href="annonces.html">Transport</a></li></ul></div>
+    <div class="footer-col"><h4>Légal</h4><ul><li><a href="contact.html#legal">Mentions légales</a></li><li><a href="contact.html#privacy">RGPD</a></li><li><a href="contact.html#cgu">CGU</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BabyEL — Mourad El Melouli &amp; Fatima El Ouafi</p>
+    <p class="footer-eco">🌿 Chaque échange est un geste pour la planète</p>
+  </div>
+</footer>
+
+<script>
+  const burger = document.querySelector('.burger-btn');
+  const nav    = document.getElementById('main-nav');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+</script>
+</body>
+</html>

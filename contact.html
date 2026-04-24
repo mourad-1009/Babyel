@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Contact BabyEL — Mentions légales belges, RGPD, CGU et formulaire de contact."/>
+  <title>Contact & Mentions légales — BabyEL</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:start; }
+    .info-card { background:linear-gradient(135deg,#F0FBF4,#FFF8F0); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s4); }
+    .form-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s4); }
+    .info-item { display:flex; gap:var(--s2); align-items:flex-start; margin-bottom:var(--s3); padding-bottom:var(--s3); border-bottom:1px solid var(--border); }
+    .info-item:last-child { border:none; margin:0; padding:0; }
+    .info-icon { width:44px; height:44px; border-radius:50%; background:var(--white); box-shadow:var(--shadow-sm); display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
+    .info-item h3 { font-family:var(--font-body); font-size:.95rem; font-weight:700; margin-bottom:.2rem; }
+    .info-item p  { font-size:.88rem; color:var(--text-mid); max-width:100%; margin:0; }
+    .legal-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s4); margin-top:var(--s5); }
+    .legal-card h2 { font-size:1.1rem; font-family:var(--font-body); font-weight:700; margin-bottom:var(--s3); color:var(--green-deep); }
+    .legal-card p, .legal-card li { font-size:.88rem; color:var(--text-mid); max-width:100%; }
+    .legal-card ul { padding-left:1.2rem; margin-bottom:var(--s2); }
+    .faq-item { background:var(--white); border:1px solid var(--border); border-radius:var(--r-lg); margin-bottom:var(--s2); overflow:hidden; }
+    .faq-q { display:flex; justify-content:space-between; align-items:center; padding:var(--s2) var(--s3); cursor:pointer; font-weight:700; font-size:.97rem; background:none; border:none; width:100%; text-align:left; font-family:var(--font-body); }
+    .faq-q:hover { background:var(--green-pale); }
+    .faq-a { padding:0 var(--s3) var(--s2); font-size:.9rem; color:var(--text-mid); display:none; }
+    .faq-a.open { display:block; }
+    .faq-arrow { transition:transform .25s; font-size:.9rem; }
+    .faq-q[aria-expanded="true"] .faq-arrow { transform:rotate(180deg); }
+    @media(max-width:768px){ .contact-layout{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<div class="quick-links" role="navigation" aria-label="Raccourcis rapides">
+  <a href="index.html"    class="quick-link">🏠 Accueil</a>
+  <a href="annonces.html" class="quick-link">🛒 Annonces</a>
+  <a href="publier.html"  class="quick-link">📸 Publier</a>
+  <a href="forum.html"    class="quick-link">💬 Forum</a>
+</div>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="BabyEL — Retour à l'accueil">
+      <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+      <span class="logo-text">BabyEL</span>
+    </a>
+    <button class="burger-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="annonces.html">Annonces</a>
+      <a href="forum.html">Forum</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html" class="active" aria-current="page">Contact</a>
+      <a href="publier.html" class="btn-nav">+ Publier</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <ol>
+    <li><a href="index.html">Accueil</a></li>
+    <li><span aria-current="page">Contact</span></li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <div class="page-header">
+    <h1>Contact &amp; Infos</h1>
+    <p>Une question ? Un souci ? Une idée ? On lit tous les messages.</p>
+  </div>
+
+  <section style="padding:var(--s5) var(--s3); background:var(--sand);">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- INFOS -->
+        <div>
+          <div class="info-card" aria-label="Informations de contact">
+            <h2 style="font-size:1.2rem;margin-bottom:var(--s3);">Nos coordonnées</h2>
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">✉️</div>
+              <div>
+                <h3>E-mail</h3>
+                <p><a href="mailto:contact@babyel.be">contact@babyel.be</a></p>
+                <p>Réponse sous 48h ouvrées</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">🇧🇪</div>
+              <div>
+                <h3>Siège social</h3>
+                <p>Belgique<br/>Mourad El Melouli &amp; Fatima El Ouafi, co-fondateurs</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">🌍</div>
+              <div>
+                <h3>Zone de service</h3>
+                <p>Belgique &amp; France</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">🕐</div>
+              <div>
+                <h3>Support</h3>
+                <p>Lun–Ven : 9h – 17h (CET)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ -->
+          <div style="margin-top:var(--s4);">
+            <h2 style="margin-bottom:var(--s3); font-size:1.4rem;">Questions fréquentes</h2>
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls="faq-1">
+                BabyEL est-il vraiment gratuit ? <span class="faq-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div id="faq-1" class="faq-a" role="region">
+                Oui, à 100 %. Publier une annonce, contacter un vendeur, parcourir les annonces — tout est gratuit. BabyEL ne prend aucune commission et ne vend pas vos données.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls="faq-2">
+                Comment se passe le paiement entre parents ? <span class="faq-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div id="faq-2" class="faq-a" role="region">
+                BabyEL met en relation — il ne gère pas les paiements. Acheteur et vendeur s'organisent directement (virement, cash, PayPal). Nous recommandons la remise en main propre pour les premiers échanges.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls="faq-3">
+                Mes données personnelles sont-elles protégées ? <span class="faq-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div id="faq-3" class="faq-a" role="region">
+                Oui. Votre e-mail n'est jamais affiché publiquement. Vos données sont traitées conformément au RGPD européen (règlement 2016/679). Voir notre politique de confidentialité ci-dessous.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls="faq-4">
+                Puis-je vendre des articles en France depuis la Belgique ? <span class="faq-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div id="faq-4" class="faq-a" role="region">
+                Absolument. BabyEL est ouvert à toute la Belgique et à la France. Indiquez simplement votre pays et votre ville dans l'annonce, et l'acheteur décidera si l'envoi ou le déplacement lui convient.
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls="faq-5">
+                Comment signaler une annonce suspecte ? <span class="faq-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div id="faq-5" class="faq-a" role="region">
+                Envoyez-nous un e-mail à <a href="mailto:contact@babyel.be">contact@babyel.be</a> avec le titre de l'annonce. Nous traitons tous les signalements sous 24h.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMULAIRE -->
+        <div class="form-card">
+          <h2 style="font-size:1.2rem; margin-bottom:var(--s3);">Envoyer un message</h2>
+
+          <div id="contact-ok" class="alert alert-success" role="alert" aria-live="polite" style="display:none; margin-bottom:var(--s3);">
+            <span aria-hidden="true">✓</span>
+            <div><strong>Message envoyé !</strong> Nous vous répondrons sous 48h.</div>
+          </div>
+
+          <form id="contact-form" novalidate aria-label="Formulaire de contact">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-prenom">Prénom <span class="req">*</span></label>
+                <input type="text" id="c-prenom" name="prenom" required placeholder="ex : Mourad" autocomplete="given-name"/>
+              </div>
+              <div class="form-group">
+                <label for="c-nom">Nom</label>
+                <input type="text" id="c-nom" name="nom" placeholder="ex : El Melouli" autocomplete="family-name"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="c-email">E-mail <span class="req">*</span></label>
+              <input type="email" id="c-email" name="email" required
+                placeholder="ex : prenom@email.be"
+                autocomplete="email"
+                aria-describedby="c-email-err"/>
+              <p id="c-email-err" class="ferr" role="alert" style="display:none;">E-mail invalide (ex : prenom@domaine.be).</p>
+            </div>
+            <div class="form-group">
+              <label for="c-sujet">Sujet <span class="req">*</span></label>
+              <select id="c-sujet" name="sujet" required>
+                <option value="">— Choisir —</option>
+                <option>Question générale</option>
+                <option>Signaler une annonce</option>
+                <option>Problème technique</option>
+                <option>Partenariat / Presse</option>
+                <option>RGPD / Mes données</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="c-msg">Message <span class="req">*</span></label>
+              <textarea id="c-msg" name="message" required minlength="20" rows="6"
+                placeholder="Décrivez votre demande en détail…"
+                aria-describedby="c-msg-err"></textarea>
+              <p id="c-msg-err" class="ferr" role="alert" style="display:none;">Message trop court (minimum 20 caractères).</p>
+            </div>
+            <div style="display:flex; gap:var(--s2); flex-wrap:wrap;">
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+              <button type="reset" class="btn btn-secondary">Annuler</button>
+            </div>
+            <p style="font-size:.78rem; color:var(--text-light); margin-top:var(--s2);">
+              * Champs obligatoires. Données non revendues, conformément au RGPD.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- MENTIONS LÉGALES -->
+      <div class="legal-card" id="legal" aria-labelledby="legal-h2">
+        <h2 id="legal-h2">📄 Mentions légales (droit belge)</h2>
+        <p><strong>Éditeur du site :</strong> BabyEL — initiative personnelle de Mourad El Melouli et Fatima El Ouafi, Belgique.</p>
+        <p><strong>Directeurs de publication :</strong> Mourad El Melouli &amp; Fatima El Ouafi</p>
+        <p><strong>Contact :</strong> <a href="mailto:contact@babyel.be">contact@babyel.be</a></p>
+        <p><strong>Hébergement :</strong> À préciser lors du déploiement (ex : Netlify, OVH…)</p>
+        <p><strong>Droit applicable :</strong> Droit belge. En cas de litige, les tribunaux compétents sont ceux du ressort du siège social.</p>
+
+        <h2 id="privacy" style="margin-top:var(--s3);">🔒 Politique de confidentialité &amp; RGPD</h2>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679) et à la loi belge du 30 juillet 2018 relative à la protection des personnes physiques à l'égard des traitements de données à caractère personnel :</p>
+        <ul>
+          <li>Les données collectées (prénom, e-mail, ville) sont utilisées uniquement pour la mise en relation entre parents.</li>
+          <li>Elles ne sont jamais vendues, louées ou cédées à des tiers.</li>
+          <li>Vous disposez d'un droit d'accès, de rectification et de suppression. Contactez : <a href="mailto:contact@babyel.be">contact@babyel.be</a></li>
+          <li>Les données sont conservées pendant la durée de vie de votre annonce + 3 mois.</li>
+        </ul>
+
+        <h2 id="cgu" style="margin-top:var(--s3);">📋 Conditions Générales d'Utilisation</h2>
+        <ul>
+          <li>BabyEL est une plateforme de mise en relation. Elle n'est pas partie aux transactions entre utilisateurs.</li>
+          <li>Toute annonce trompeuse, dangereuse ou illicite est interdite et sera supprimée.</li>
+          <li>Les utilisateurs sont responsables du contenu qu'ils publient.</li>
+          <li>BabyEL se réserve le droit de modérer, modifier ou supprimer tout contenu sans préavis.</li>
+          <li>L'utilisation du site est gratuite et sans inscription obligatoire pour la consultation.</li>
+          <li>BabyEL décline toute responsabilité en cas de litige entre utilisateurs.</li>
+        </ul>
+        <p style="margin-top:var(--s2);"><em>Ces CGU sont susceptibles d'évoluer. La version en vigueur est toujours celle disponible sur cette page.</em></p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo"><img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/><span class="logo-text">BabyEL</span></a>
+      <p class="footer-desc">Plateforme éco-solidaire de revente d'articles bébé entre parents.<br>Fondée par Mourad El Melouli &amp; Fatima El Ouafi — Belgique.</p>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="annonces.html">Annonces</a></li><li><a href="forum.html">Forum</a></li><li><a href="apropos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Catégories</h4><ul><li><a href="annonces.html">Vêtements</a></li><li><a href="annonces.html">Mobilier</a></li><li><a href="annonces.html">Jeux &amp; Éveil</a></li><li><a href="annonces.html">Transport</a></li></ul></div>
+    <div class="footer-col"><h4>Légal</h4><ul><li><a href="#legal">Mentions légales</a></li><li><a href="#privacy">RGPD</a></li><li><a href="#cgu">CGU</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BabyEL — Mourad El Melouli &amp; Fatima El Ouafi</p>
+    <p class="footer-eco">🌿 Chaque échange est un geste pour la planète</p>
+  </div>
+</footer>
+
+<script>
+  const burger = document.querySelector('.burger-btn');
+  const nav    = document.getElementById('main-nav');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+
+  // FAQ accordéon
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      const answer = document.getElementById(this.getAttribute('aria-controls'));
+      answer.classList.toggle('open', !expanded);
+    });
+  });
+
+  // Formulaire contact
+  const form = document.getElementById('contact-form');
+  const ok   = document.getElementById('contact-ok');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let hasErr = false;
+    const email = document.getElementById('c-email');
+    const emailErr = document.getElementById('c-email-err');
+    if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('err'); emailErr.style.display='flex'; hasErr=true; }
+    else { email.classList.remove('err'); emailErr.style.display='none'; }
+    const msg = document.getElementById('c-msg');
+    const msgErr = document.getElementById('c-msg-err');
+    if (!msg.value || msg.value.length < 20) { msg.classList.add('err'); msgErr.style.display='flex'; hasErr=true; }
+    else { msg.classList.remove('err'); msgErr.style.display='none'; }
+    if (hasErr) return;
+    ok.style.display = 'flex';
+    ok.scrollIntoView({ behavior:'smooth', block:'center' });
+    form.reset();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Publiez votre annonce d'articles bébé sur BabyEL — gratuit, rapide, éco-solidaire."/>
+  <title>Publier une annonce — BabyEL</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .pub-layout { display:grid; grid-template-columns:1fr 300px; gap:var(--s4); align-items:start; }
+    .form-card  { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s4); }
+    .help-card  { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s3); position:sticky; top:100px; }
+    .help-card h3 { font-family:var(--font-body); font-weight:700; font-size:1rem; margin-bottom:var(--s2); color:var(--green-deep); }
+    .help-item  { display:flex; gap:.75rem; align-items:flex-start; margin-bottom:var(--s2); }
+    .help-icon  { font-size:1.3rem; flex-shrink:0; margin-top:.1rem; }
+    .help-item strong { font-size:.9rem; display:block; margin-bottom:.15rem; }
+    .help-item p { font-size:.82rem; color:var(--text-mid); max-width:100%; margin:0; }
+    .step-bar   { display:flex; align-items:center; gap:.5rem; margin-bottom:var(--s4); }
+    .step       { display:flex; align-items:center; gap:.4rem; font-size:.83rem; font-weight:600; }
+    .step-num   { width:28px; height:28px; border-radius:50%; background:var(--border); color:var(--text-light); display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; flex-shrink:0; transition:all .3s; }
+    .step.active .step-num { background:var(--green-deep); color:white; }
+    .step.done  .step-num  { background:var(--green-light); color:white; }
+    .step-line  { flex:1; height:2px; background:var(--border); }
+    .upload-zone { border:2px dashed var(--border); border-radius:var(--r-lg); padding:var(--s4); text-align:center; cursor:pointer; transition:border-color .2s, background .2s; }
+    .upload-zone:hover { border-color:var(--green-mid); background:var(--green-pale); }
+    .upload-zone p { font-size:.88rem; color:var(--text-light); max-width:100%; margin:.5rem 0 0; }
+    .check-row { display:flex; align-items:flex-start; gap:.75rem; padding:var(--s2); background:var(--sand); border-radius:var(--r-md); margin-top:var(--s3); }
+    .check-row input[type=checkbox] { width:20px; height:20px; min-height:20px; flex-shrink:0; accent-color:var(--green-deep); cursor:pointer; margin-top:.15rem; }
+    .check-row label { font-weight:400; font-size:.9rem; margin:0; cursor:pointer; }
+    .fieldset-head { font-family:var(--font-body); font-weight:700; font-size:1.05rem; color:var(--green-deep); border-bottom:2px solid var(--green-pale); padding-bottom:.5rem; margin-bottom:var(--s3); }
+    @media(max-width:900px){ .pub-layout{grid-template-columns:1fr;} .help-card{position:static;} }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<div class="quick-links" role="navigation" aria-label="Raccourcis rapides">
+  <a href="index.html"    class="quick-link">🏠 Accueil</a>
+  <a href="annonces.html" class="quick-link">🛒 Voir les annonces</a>
+  <a href="forum.html"    class="quick-link">💬 Forum</a>
+  <a href="contact.html"  class="quick-link">✉️ Contact</a>
+</div>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="BabyEL — Retour à l'accueil">
+      <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+      <span class="logo-text">BabyEL</span>
+    </a>
+    <button class="burger-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="annonces.html">Annonces</a>
+      <a href="forum.html">Forum</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="publier.html" class="btn-nav active" aria-current="page">+ Publier</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <ol>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="annonces.html">Annonces</a></li>
+    <li><span aria-current="page">Publier</span></li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <div class="page-header">
+    <h1>Publier une annonce</h1>
+    <p>Décrivez votre lot bébé. Publication 100 % gratuite, visible immédiatement.</p>
+  </div>
+
+  <section style="padding:var(--s5) var(--s3); background:var(--sand);">
+    <div class="container">
+      <div id="pub-success" class="alert alert-success" role="alert" aria-live="polite" style="display:none; margin-bottom:var(--s4);">
+        <span aria-hidden="true">✓</span>
+        <div>
+          <strong>Votre annonce est publiée !</strong> Elle est visible dans la <a href="annonces.html">liste des annonces</a>.
+        </div>
+      </div>
+
+      <div class="pub-layout">
+        <!-- FORMULAIRE -->
+        <div>
+          <!-- Barre d'étapes -->
+          <div class="step-bar" aria-label="Étapes du formulaire">
+            <div class="step active" id="step1-indicator">
+              <span class="step-num" aria-label="Étape 1 en cours">1</span>
+              <span>Votre lot</span>
+            </div>
+            <div class="step-line" aria-hidden="true"></div>
+            <div class="step" id="step2-indicator">
+              <span class="step-num" aria-label="Étape 2">2</span>
+              <span>Photos</span>
+            </div>
+            <div class="step-line" aria-hidden="true"></div>
+            <div class="step" id="step3-indicator">
+              <span class="step-num" aria-label="Étape 3">3</span>
+              <span>Contact</span>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <form id="pub-form" novalidate aria-label="Formulaire de publication">
+
+              <!-- SECTION 1 — Le lot -->
+              <fieldset style="border:none;padding:0;margin-bottom:var(--s4);">
+                <legend><p class="fieldset-head">📦 Votre lot</p></legend>
+
+                <div class="form-group">
+                  <label for="p-titre">Titre de l'annonce <span class="req" aria-label="obligatoire">*</span></label>
+                  <input type="text" id="p-titre" name="titre" required minlength="10" maxlength="120"
+                    placeholder="ex : Lot 15 bodys garçon 0–3 mois, marque Petit Bateau"
+                    aria-describedby="p-titre-hint p-titre-err"/>
+                  <p id="p-titre-hint" class="hint">Entre 10 et 120 caractères. Un titre précis = plus de contacts.</p>
+                  <p id="p-titre-err"  class="ferr" role="alert" style="display:none;">Le titre doit comporter au moins 10 caractères.</p>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="p-cat">Catégorie <span class="req">*</span></label>
+                    <select id="p-cat" name="categorie" required>
+                      <option value="">— Choisir —</option>
+                      <option>Vêtements</option>
+                      <option>Mobilier</option>
+                      <option>Jeux &amp; Éveil</option>
+                      <option>Transport</option>
+                      <option>Alimentation</option>
+                      <option>Bain &amp; Hygiène</option>
+                      <option>Autre</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="p-age">Tranche d'âge <span class="req">*</span></label>
+                    <select id="p-age" name="age" required>
+                      <option value="">— Choisir —</option>
+                      <option>Naissance</option>
+                      <option>0–3 mois</option>
+                      <option>3–6 mois</option>
+                      <option>6–12 mois</option>
+                      <option>1–2 ans</option>
+                      <option>2–3 ans</option>
+                      <option>3 ans +</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="p-desc">Description du lot <span class="req">*</span></label>
+                  <textarea id="p-desc" name="description" required minlength="30" rows="5"
+                    placeholder="Décrivez le contenu : nombre de pièces, marques, état général, raison de la vente…"
+                    aria-describedby="p-desc-hint p-desc-err"></textarea>
+                  <p id="p-desc-hint" class="hint">Minimum 30 caractères. Plus vous détaillez, mieux c'est.</p>
+                  <p id="p-desc-err" class="ferr" role="alert" style="display:none;">La description est trop courte (minimum 30 caractères).</p>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="p-etat">État des articles <span class="req">*</span></label>
+                    <select id="p-etat" name="etat" required>
+                      <option value="">— Choisir —</option>
+                      <option value="neuf">Neuf avec étiquette</option>
+                      <option value="tbe">Très bon état</option>
+                      <option value="be">Bon état</option>
+                      <option value="usage">Bon état / usage visible</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="p-prix">Prix du lot (€) <span class="req">*</span></label>
+                    <input type="number" id="p-prix" name="prix" required min="1" max="9999"
+                      placeholder="ex : 25"
+                      aria-describedby="p-prix-hint p-prix-err"/>
+                    <p id="p-prix-hint" class="hint">Nombre entier en euros (ex : 25)</p>
+                    <p id="p-prix-err" class="ferr" role="alert" style="display:none;">Veuillez indiquer un prix entre 1 € et 9 999 €.</p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- SECTION 2 — Photos -->
+              <fieldset style="border:none;padding:0;margin-bottom:var(--s4);">
+                <legend><p class="fieldset-head">📸 Photos du lot</p></legend>
+                <div class="upload-zone" role="button" tabindex="0"
+                  aria-label="Zone d'ajout de photos — cliquez ou déposez vos images"
+                  onclick="document.getElementById('p-photos').click()"
+                  onkeypress="if(event.key==='Enter')document.getElementById('p-photos').click()">
+                  <div style="font-size:2.5rem;" aria-hidden="true">📷</div>
+                  <strong>Cliquez ou déposez vos photos ici</strong>
+                  <p>JPG, PNG, WebP — max 5 photos, 5 Mo chacune</p>
+                  <p style="font-size:.8rem;">Les annonces avec photos reçoivent 3× plus de contacts.</p>
+                </div>
+                <input type="file" id="p-photos" name="photos" accept="image/*" multiple
+                  style="position:absolute;width:1px;height:1px;opacity:0;" aria-label="Sélectionner des photos"/>
+                <div id="photo-preview" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:var(--s2);"></div>
+              </fieldset>
+
+              <!-- SECTION 3 — Contact -->
+              <fieldset style="border:none;padding:0;margin-bottom:var(--s3);">
+                <legend><p class="fieldset-head">📍 Vos coordonnées</p></legend>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="p-prenom">Prénom <span class="req">*</span></label>
+                    <input type="text" id="p-prenom" name="prenom" required placeholder="ex : Fatima" autocomplete="given-name"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="p-pays">Pays <span class="req">*</span></label>
+                    <select id="p-pays" name="pays" required>
+                      <option value="">— Choisir —</option>
+                      <option value="Belgique">🇧🇪 Belgique</option>
+                      <option value="France">🇫🇷 France</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="p-ville">Ville <span class="req">*</span></label>
+                    <input type="text" id="p-ville" name="ville" required placeholder="ex : Bruxelles" autocomplete="address-level2"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="p-code">Code postal <span class="req">*</span></label>
+                    <input type="text" id="p-code" name="code_postal" required placeholder="ex : 1000"
+                      aria-describedby="p-code-hint"/>
+                    <p id="p-code-hint" class="hint">BE : 4 chiffres · FR : 5 chiffres</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="p-email">Adresse e-mail <span class="req">*</span></label>
+                  <input type="email" id="p-email" name="email" required
+                    placeholder="ex : fatima@email.be"
+                    autocomplete="email"
+                    aria-describedby="p-email-hint p-email-err"/>
+                  <p id="p-email-hint" class="hint">Ne sera jamais affichée. Format : exemple@domaine.be ou .fr</p>
+                  <p id="p-email-err" class="ferr" role="alert" style="display:none;">Adresse e-mail invalide (ex : nom@domaine.be).</p>
+                </div>
+              </fieldset>
+
+              <!-- CGU -->
+              <div class="check-row">
+                <input type="checkbox" id="p-cgu" name="cgu" required aria-describedby="p-cgu-err"/>
+                <label for="p-cgu">
+                  J'accepte les <a href="contact.html#cgu">Conditions Générales d'Utilisation</a> de BabyEL 
+                  et certifie que les articles correspondent à leur description.
+                  <span class="req">*</span>
+                </label>
+              </div>
+              <p id="p-cgu-err" class="ferr" role="alert" style="display:none; margin-top:.5rem;">
+                Vous devez accepter les CGU pour publier votre annonce.
+              </p>
+
+              <div style="margin-top:var(--s3); display:flex; gap:var(--s2); flex-wrap:wrap; align-items:center;">
+                <button type="submit" class="btn btn-primary" id="pub-btn">
+                  Publier gratuitement
+                </button>
+                <a href="annonces.html" class="btn btn-secondary">Annuler</a>
+              </div>
+
+              <p style="font-size:.78rem;color:var(--text-light);margin-top:var(--s2);">
+                <span aria-hidden="true">*</span> Champs obligatoires · Vos données restent confidentielles
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <!-- AIDE -->
+        <aside class="help-card" aria-label="Conseils pour publier">
+          <h3>💡 Conseils pour bien vendre</h3>
+          <div class="help-item">
+            <span class="help-icon" aria-hidden="true">📝</span>
+            <div>
+              <strong>Titre précis</strong>
+              <p>Mentionnez âge, quantité et marques dès le titre.</p>
+            </div>
+          </div>
+          <div class="help-item">
+            <span class="help-icon" aria-hidden="true">📸</span>
+            <div>
+              <strong>Belles photos</strong>
+              <p>Lumière naturelle, fond clair. 3× plus de contacts avec des photos.</p>
+            </div>
+          </div>
+          <div class="help-item">
+            <span class="help-icon" aria-hidden="true">💶</span>
+            <div>
+              <strong>Prix juste</strong>
+              <p>20–30 % du prix neuf pour un article en bon état.</p>
+            </div>
+          </div>
+          <div class="help-item">
+            <span class="help-icon" aria-hidden="true">✅</span>
+            <div>
+              <strong>Soyez honnête</strong>
+              <p>Signalez les petits défauts. La confiance, c'est le cœur de BabyEL.</p>
+            </div>
+          </div>
+          <div style="background:var(--green-pale);border-radius:var(--r-md);padding:var(--s2);margin-top:var(--s3);border:1px solid rgba(45,106,79,.2);">
+            <p style="font-size:.83rem;font-weight:700;color:var(--green-deep);margin-bottom:.25rem;max-width:100%;">🌿 Geste éco-solidaire</p>
+            <p style="font-size:.8rem;color:var(--green-deep);max-width:100%;margin:0;">Chaque annonce publiée, c'est un article qui ne finira pas à la poubelle. Merci de faire partie de la solution.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo"><img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/><span class="logo-text">BabyEL</span></a>
+      <p class="footer-desc">Plateforme éco-solidaire de revente d'articles bébé entre parents.<br>Fondée par Mourad El Melouli &amp; Fatima El Ouafi — Belgique.</p>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="annonces.html">Annonces</a></li><li><a href="forum.html">Forum</a></li><li><a href="apropos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Légal</h4><ul><li><a href="contact.html#legal">Mentions légales</a></li><li><a href="contact.html#privacy">RGPD</a></li><li><a href="contact.html#cgu">CGU</a></li></ul></div>
+    <div class="footer-col"><h4>Éco-responsable</h4><ul><li><a href="apropos.html">Notre engagement</a></li><li><a href="forum.html">Conseils parents</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BabyEL — Mourad El Melouli &amp; Fatima El Ouafi</p>
+    <p class="footer-eco">🌿 Chaque échange est un geste pour la planète</p>
+  </div>
+</footer>
+
+<script>
+  // Burger
+  const burger = document.querySelector('.burger-btn');
+  const nav    = document.getElementById('main-nav');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+
+  // Preview photos
+  document.getElementById('p-photos').addEventListener('change', function() {
+    const preview = document.getElementById('photo-preview');
+    preview.innerHTML = '';
+    [...this.files].slice(0,5).forEach(file => {
+      const url = URL.createObjectURL(file);
+      const img = document.createElement('img');
+      img.src = url; img.alt = file.name;
+      img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border);';
+      preview.appendChild(img);
+    });
+  });
+
+  // Validation
+  const form = document.getElementById('pub-form');
+  const successDiv = document.getElementById('pub-success');
+  const STORAGE_KEY = 'babyel_annonces';
+
+  function showErr(inputId, errId, show) {
+    const el  = document.getElementById(inputId);
+    const err = document.getElementById(errId);
+    if (!el || !err) return;
+    if (show) { el.classList.add('err'); el.setAttribute('aria-invalid','true'); err.style.display='flex'; }
+    else       { el.classList.remove('err'); el.setAttribute('aria-invalid','false'); err.style.display='none'; }
+  }
+
+  // Validation temps réel
+  document.getElementById('p-email').addEventListener('blur', function() {
+    showErr('p-email','p-email-err', this.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value));
+  });
+  document.getElementById('p-titre').addEventListener('blur', function() {
+    showErr('p-titre','p-titre-err', this.value && this.value.length < 10);
+  });
+  document.getElementById('p-desc').addEventListener('blur', function() {
+    showErr('p-desc','p-desc-err', this.value && this.value.length < 30);
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let hasErr = false;
+
+    const titre = document.getElementById('p-titre');
+    if (!titre.value || titre.value.length < 10) { showErr('p-titre','p-titre-err',true); hasErr=true; }
+    else showErr('p-titre','p-titre-err',false);
+
+    const email = document.getElementById('p-email');
+    if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { showErr('p-email','p-email-err',true); hasErr=true; }
+    else showErr('p-email','p-email-err',false);
+
+    const desc = document.getElementById('p-desc');
+    if (!desc.value || desc.value.length < 30) { showErr('p-desc','p-desc-err',true); hasErr=true; }
+    else showErr('p-desc','p-desc-err',false);
+
+    const prix = document.getElementById('p-prix');
+    const pv = parseFloat(prix.value);
+    if (!prix.value || pv < 1 || pv > 9999) { showErr('p-prix','p-prix-err',true); hasErr=true; }
+    else showErr('p-prix','p-prix-err',false);
+
+    const cgu = document.getElementById('p-cgu');
+    const cguErr = document.getElementById('p-cgu-err');
+    if (!cgu.checked) { cguErr.style.display='flex'; hasErr=true; }
+    else cguErr.style.display='none';
+
+    if (hasErr) { form.querySelector('[aria-invalid="true"]')?.focus(); return; }
+
+    // Sauvegarder dans localStorage (remplacer par API backend au lancement réel)
+    const annonces = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    annonces.unshift({
+      id:          Date.now(),
+      titre:       document.getElementById('p-titre').value.trim(),
+      categorie:   document.getElementById('p-cat').value,
+      age:         document.getElementById('p-age').value,
+      etat:        document.getElementById('p-etat').value,
+      prix:        document.getElementById('p-prix').value,
+      description: document.getElementById('p-desc').value.trim(),
+      prenom:      document.getElementById('p-prenom').value.trim(),
+      ville:       document.getElementById('p-ville').value.trim(),
+      pays:        document.getElementById('p-pays').value,
+      code_postal: document.getElementById('p-code').value.trim(),
+      date:        new Date().toISOString(),
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(annonces));
+
+    // Succès
+    successDiv.style.display = 'flex';
+    successDiv.scrollIntoView({ behavior:'smooth', block:'center' });
+    form.reset();
+    document.getElementById('photo-preview').innerHTML = '';
+
+    // Mettre à jour les indicateurs d'étapes
+    document.querySelectorAll('.step').forEach(s => s.classList.add('done'));
+  });
+</script>
+</body>
+</html>

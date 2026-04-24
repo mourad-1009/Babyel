@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Forum BabyEL — Conseils, astuces et entraide entre parents. Posez vos questions, partagez vos expériences."/>
+  <title>Forum conseils — BabyEL</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .forum-layout { display: grid; grid-template-columns: 1fr 320px; gap: var(--s4); align-items: start; }
+    .forum-sidebar { position: sticky; top: 100px; }
+    .sidebar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--s3); margin-bottom: var(--s3); }
+    .sidebar-card h3 { font-size: 1rem; font-family: var(--font-body); font-weight: 700; margin-bottom: var(--s2); color: var(--green-deep); }
+    .cat-list { list-style: none; }
+    .cat-list li { margin-bottom: .5rem; }
+    .cat-list a {
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none; color: var(--text-mid); font-size: .9rem;
+      padding: .4rem .6rem; border-radius: var(--r-sm);
+      transition: background .15s;
+    }
+    .cat-list a:hover { background: var(--green-pale); color: var(--green-deep); }
+    .cat-count { background: var(--sand-dark); color: var(--text-light); font-size: .75rem; font-weight: 700; padding: .1rem .5rem; border-radius: var(--r-full); }
+    .new-post-form { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--s4); margin-bottom: var(--s4); }
+    .new-post-form h3 { font-family: var(--font-body); font-weight: 700; margin-bottom: var(--s3); font-size: 1.1rem; }
+    .forum-tabs { display: flex; gap: .5rem; margin-bottom: var(--s3); flex-wrap: wrap; }
+    .tab-btn {
+      padding: .45rem 1.1rem; border-radius: var(--r-full);
+      border: 1.5px solid var(--border); background: var(--white);
+      font-family: var(--font-body); font-size: .88rem; font-weight: 600;
+      cursor: pointer; transition: all .18s; color: var(--text-mid);
+    }
+    .tab-btn:hover, .tab-btn.active { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+    .reply-area { background: var(--sand); border-radius: var(--r-lg); padding: var(--s3); margin-top: var(--s2); border: 1px solid var(--border); display: none; }
+    .reply-area.open { display: block; }
+    @media (max-width: 900px) {
+      .forum-layout { grid-template-columns: 1fr; }
+      .forum-sidebar { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<div class="quick-links" role="navigation" aria-label="Raccourcis rapides">
+  <a href="index.html"    class="quick-link">🏠 Accueil</a>
+  <a href="annonces.html" class="quick-link">🛒 Annonces</a>
+  <a href="publier.html"  class="quick-link">📸 Publier</a>
+  <a href="forum.html"    class="quick-link">💬 Forum</a>
+  <a href="contact.html"  class="quick-link">✉️ Contact</a>
+</div>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="BabyEL — Retour à l'accueil">
+      <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+      <span class="logo-text">BabyEL</span>
+    </a>
+    <button class="burger-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="annonces.html">Annonces</a>
+      <a href="forum.html" class="active" aria-current="page">Forum</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="publier.html" class="btn-nav">+ Publier</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <ol>
+    <li><a href="index.html">Accueil</a></li>
+    <li><span aria-current="page">Forum conseils</span></li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <div class="page-header">
+    <h1>💬 Forum conseils parents</h1>
+    <p>Posez vos questions, partagez vos astuces. Ici, chaque parent est expert de sa propre expérience.</p>
+  </div>
+
+  <section style="padding: var(--s5) var(--s3); background: var(--sand);">
+    <div class="container">
+      <div class="forum-layout">
+
+        <!-- COLONNE PRINCIPALE -->
+        <div>
+
+          <!-- Formulaire nouveau post -->
+          <div class="new-post-form">
+            <h3>✏️ Partager un conseil ou poser une question</h3>
+            <div id="post-success" class="alert alert-success" style="display:none;" role="alert" aria-live="polite">
+              <span aria-hidden="true">✓</span>
+              <div><strong>Votre message a été soumis !</strong> Il sera visible après validation par notre équipe.</div>
+            </div>
+            <form id="forum-form" novalidate aria-label="Nouveau post">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="post-prenom">Votre prénom <span class="req" aria-label="obligatoire">*</span></label>
+                  <input type="text" id="post-prenom" name="prenom" required placeholder="ex : Marie" autocomplete="given-name"/>
+                </div>
+                <div class="form-group">
+                  <label for="post-cat">Catégorie <span class="req">*</span></label>
+                  <select id="post-cat" name="categorie" required>
+                    <option value="">— Choisir —</option>
+                    <option>Allaitement &amp; alimentation</option>
+                    <option>Sommeil &amp; routine</option>
+                    <option>Santé &amp; bien-être</option>
+                    <option>Bons plans &amp; économies</option>
+                    <option>Achats &amp; revente</option>
+                    <option>Développement &amp; éveil</option>
+                    <option>Éco-responsabilité</option>
+                    <option>Question générale</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="post-titre">Titre de votre message <span class="req">*</span></label>
+                <input type="text" id="post-titre" name="titre" required
+                  placeholder="ex : Comment gérer les nuits sans sommeil au 3e mois ?"
+                  aria-describedby="titre-hint" minlength="10" maxlength="120"/>
+                <p id="titre-hint" class="hint">Soyez précis — un bon titre attire les bonnes réponses.</p>
+              </div>
+              <div class="form-group">
+                <label for="post-message">Votre message <span class="req">*</span></label>
+                <textarea id="post-message" name="message" required minlength="30" rows="5"
+                  placeholder="Décrivez votre situation, votre astuce ou votre question en détail…"
+                  aria-describedby="msg-hint"></textarea>
+                <p id="msg-hint" class="hint">Minimum 30 caractères. Plus vous partagez de détails, meilleures seront les réponses.</p>
+              </div>
+              <div style="display:flex;gap:var(--s2);flex-wrap:wrap;">
+                <button type="submit" class="btn btn-primary">Publier mon message</button>
+                <button type="reset" class="btn btn-secondary">Effacer</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Onglets -->
+          <div class="forum-tabs" role="tablist" aria-label="Filtrer les discussions">
+            <button class="tab-btn active" role="tab" aria-selected="true">Tous</button>
+            <button class="tab-btn" role="tab" aria-selected="false">Récents</button>
+            <button class="tab-btn" role="tab" aria-selected="false">Populaires</button>
+            <button class="tab-btn" role="tab" aria-selected="false">Sans réponse</button>
+          </div>
+
+          <!-- État vide — prêt pour de vrais posts -->
+          <div class="empty-state" role="status" aria-live="polite">
+            <div class="empty-icon" aria-hidden="true">🌱</div>
+            <h3>Le forum commence avec vous</h3>
+            <p>
+              Aucune discussion pour l'instant — BabyEL démarre ! Partagez votre première astuce de parent,
+              posez la question qui vous tracasse, ou racontez une expérience utile aux autres familles.
+              Votre message sera le premier d'une longue liste.
+            </p>
+          </div>
+
+          <!-- Exemple de post type (commenté — décommentez quand vrais posts) -->
+          <!--
+          <article class="post-card" aria-labelledby="post-1-title">
+            <div class="post-meta">
+              <div class="post-avatar" aria-hidden="true">M</div>
+              <div>
+                <span class="post-author">Mourad</span>
+                <span class="post-date">· il y a 2 jours</span>
+              </div>
+              <span class="post-cat">Bons plans</span>
+            </div>
+            <h2 id="post-1-title" class="post-title">
+              Mon astuce pour diviser par 2 le budget vêtements bébé
+            </h2>
+            <p class="post-excerpt">
+              Après avoir dépensé une fortune pour notre première fille, on a trouvé une méthode simple...
+            </p>
+            <div class="post-actions">
+              <button class="post-like" aria-pressed="false" aria-label="J'aime ce post">❤️ <span>12</span></button>
+              <button class="reply-btn">Répondre</button>
+              <span style="font-size:.82rem;color:var(--text-light);">3 réponses</span>
+            </div>
+          </article>
+          -->
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="forum-sidebar" aria-label="Catégories et informations forum">
+          <div class="sidebar-card">
+            <h3>📂 Catégories</h3>
+            <ul class="cat-list">
+              <li><a href="#">🍼 Allaitement &amp; alimentation <span class="cat-count">0</span></a></li>
+              <li><a href="#">😴 Sommeil &amp; routine <span class="cat-count">0</span></a></li>
+              <li><a href="#">❤️ Santé &amp; bien-être <span class="cat-count">0</span></a></li>
+              <li><a href="#">💶 Bons plans &amp; économies <span class="cat-count">0</span></a></li>
+              <li><a href="#">🛒 Achats &amp; revente <span class="cat-count">0</span></a></li>
+              <li><a href="#">🧠 Développement &amp; éveil <span class="cat-count">0</span></a></li>
+              <li><a href="#">🌿 Éco-responsabilité <span class="cat-count">0</span></a></li>
+              <li><a href="#">❓ Questions générales <span class="cat-count">0</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h3>📜 Règles de la communauté</h3>
+            <p style="font-size:.87rem;color:var(--text-mid);max-width:100%;">
+              1. Bienveillance et respect avant tout.<br/>
+              2. Pas de publicité ni de lien commercial.<br/>
+              3. Respectez la vie privée de chacun.<br/>
+              4. Un doute ? Signalez, l'équipe BabyEL s'en occupe.
+            </p>
+          </div>
+          <div class="sidebar-card" style="background:var(--green-pale);border-color:rgba(45,106,79,.2);">
+            <h3>💡 Conseil BabyEL</h3>
+            <p style="font-size:.87rem;color:var(--green-deep);max-width:100%;">
+              Les posts les plus utiles sont ceux qui partagent une expérience concrète.
+              Racontez <em>ce qui a marché pour vous</em>, pas ce qui devrait marcher en théorie.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo" aria-label="BabyEL accueil">
+        <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+        <span class="logo-text">BabyEL</span>
+      </a>
+      <p class="footer-desc">Plateforme éco-solidaire de revente d'articles bébé entre parents.<br>Fondée par Mourad El Melouli &amp; Fatima El Ouafi — Belgique.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="annonces.html">Annonces</a></li>
+        <li><a href="forum.html">Forum</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Forum</h4>
+      <ul>
+        <li><a href="forum.html">Toutes les discussions</a></li>
+        <li><a href="forum.html">Poser une question</a></li>
+        <li><a href="forum.html">Règles communauté</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <ul>
+        <li><a href="contact.html#legal">Mentions légales</a></li>
+        <li><a href="contact.html#privacy">RGPD</a></li>
+        <li><a href="contact.html#cgu">CGU</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BabyEL — Mourad El Melouli &amp; Fatima El Ouafi</p>
+    <p class="footer-eco">🌿 Chaque échange est un geste pour la planète</p>
+  </div>
+</footer>
+
+<script>
+  // Burger
+  const burger = document.querySelector('.burger-btn');
+  const nav    = document.getElementById('main-nav');
+  burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+
+  // Tabs forum
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      this.classList.add('active');
+      this.setAttribute('aria-selected','true');
+    });
+  });
+
+  // Soumission du post
+  const form = document.getElementById('forum-form');
+  const successMsg = document.getElementById('post-success');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let ok = true;
+    ['post-prenom','post-cat','post-titre','post-message'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim() || (el.minLength && el.value.trim().length < el.minLength)) {
+        el.classList.add('err'); ok = false;
+      } else {
+        el.classList.remove('err');
+      }
+    });
+    if (!ok) { form.querySelector('.err')?.focus(); return; }
+    successMsg.style.display = 'flex';
+    successMsg.scrollIntoView({ behavior:'smooth', block:'center' });
+    form.reset();
+  });
+  // Retirer .err au focus
+  form.querySelectorAll('input,select,textarea').forEach(el => {
+    el.addEventListener('input', () => el.classList.remove('err'));
+  });
+
+  // Like buttons
+  document.querySelectorAll('.post-like').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const liked = this.getAttribute('aria-pressed') === 'true';
+      this.setAttribute('aria-pressed', !liked);
+      this.classList.toggle('liked', !liked);
+      const count = this.querySelector('span');
+      count.textContent = liked ? parseInt(count.textContent) - 1 : parseInt(count.textContent) + 1;
+    });
+  });
+
+  // Reply toggle
+  document.querySelectorAll('.reply-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const area = this.closest('.post-card').querySelector('.reply-area');
+      if (area) { area.classList.toggle('open'); this.textContent = area.classList.contains('open') ? 'Fermer' : 'Répondre'; }
+    });
+  });
+</script>
+</body>
+</html>

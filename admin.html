@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Espace Admin — BabyEL</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body { background: #0F1912; }
+    .admin-wrap { min-height:100vh; display:flex; flex-direction:column; }
+    .admin-topbar { background:#1A2E1F; border-bottom:1px solid #2A4030; padding:.75rem var(--s3); display:flex; align-items:center; justify-content:space-between; gap:var(--s2); flex-wrap:wrap; }
+    .admin-topbar .logo-text { color:var(--green-light); }
+    .admin-topbar nav a { color:#aaa; text-decoration:none; font-size:.88rem; font-weight:600; margin-left:.75rem; }
+    .admin-topbar nav a:hover { color:var(--green-light); }
+    .admin-main { flex:1; padding:var(--s4) var(--s3); max-width:1200px; margin:0 auto; width:100%; }
+    h1.admin-h1 { font-family:var(--font-body); font-size:1.5rem; font-weight:700; color:var(--white); margin-bottom:var(--s4); }
+    .admin-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s3); margin-bottom:var(--s5); }
+    .stat-card { background:#1A2E1F; border:1px solid #2A4030; border-radius:var(--r-lg); padding:var(--s3); text-align:center; }
+    .stat-num  { font-family:var(--font-display); font-size:2.5rem; color:var(--green-light); display:block; }
+    .stat-lbl  { font-size:.82rem; color:#888; }
+    .admin-panel { background:#1A2E1F; border:1px solid #2A4030; border-radius:var(--r-xl); padding:var(--s4); margin-bottom:var(--s4); }
+    .admin-panel h2 { font-family:var(--font-body); font-size:1.1rem; font-weight:700; color:var(--green-light); margin-bottom:var(--s3); display:flex; align-items:center; gap:.5rem; }
+    .admin-table { width:100%; border-collapse:collapse; font-size:.88rem; color:#ccc; }
+    .admin-table th { text-align:left; padding:.6rem 1rem; background:#111B13; color:#777; font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid #2A4030; }
+    .admin-table td { padding:.7rem 1rem; border-bottom:1px solid #1F3525; vertical-align:top; }
+    .admin-table tr:last-child td { border:none; }
+    .admin-table tr:hover td { background:rgba(116,198,157,.05); }
+    .badge-active { background:rgba(116,198,157,.15); color:var(--green-light); padding:.15rem .6rem; border-radius:var(--r-full); font-size:.75rem; font-weight:700; }
+    .badge-pending{ background:rgba(255,171,118,.15); color:var(--peach); padding:.15rem .6rem; border-radius:var(--r-full); font-size:.75rem; font-weight:700; }
+    .btn-admin { display:inline-flex; align-items:center; gap:.3rem; padding:.35rem .9rem; border-radius:var(--r-full); font-size:.8rem; font-weight:700; cursor:pointer; border:1px solid; text-decoration:none; transition:all .18s; }
+    .btn-a-green { background:transparent; color:var(--green-light); border-color:var(--green-light); }
+    .btn-a-green:hover { background:var(--green-light); color:#111; }
+    .btn-a-red   { background:transparent; color:#f87171; border-color:#f87171; }
+    .btn-a-red:hover   { background:#f87171; color:white; }
+    .btn-a-orange{ background:transparent; color:var(--peach); border-color:var(--peach); }
+    .btn-a-orange:hover{ background:var(--peach); color:#111; }
+    .edit-field { background:#111B13; border:1px solid #2A4030; border-radius:var(--r-sm); color:#ddd; font-family:var(--font-body); font-size:.9rem; padding:.5rem .75rem; width:100%; margin-bottom:.5rem; }
+    .edit-field:focus { border-color:var(--green-light); outline:none; box-shadow:0 0 0 2px rgba(116,198,157,.2); }
+    .admin-login { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+    .login-card  { background:#1A2E1F; border:1px solid #2A4030; border-radius:var(--r-xl); padding:var(--s5); max-width:380px; width:100%; text-align:center; }
+    .login-card h1 { font-family:var(--font-body); font-size:1.5rem; color:var(--white); margin-bottom:var(--s2); }
+    .login-card p  { color:#888; font-size:.9rem; margin-bottom:var(--s4); max-width:100%; }
+    @media(max-width:768px){ .admin-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:480px){ .admin-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body class="admin-wrap">
+
+<!-- LOGIN (affiché si non connecté) -->
+<div id="login-screen" class="admin-login">
+  <div class="login-card">
+    <div style="font-size:3rem;margin-bottom:var(--s2);" aria-hidden="true">🍃</div>
+    <h1>Espace Admin BabyEL</h1>
+    <p>Accès réservé à Mourad El Melouli &amp; Fatima El Ouafi</p>
+    <div class="form-group" style="text-align:left;">
+      <label for="admin-pw" style="color:#aaa;">Mot de passe</label>
+      <input type="password" id="admin-pw" class="edit-field" placeholder="••••••••"
+        aria-describedby="pw-hint"/>
+      <p id="pw-hint" style="font-size:.78rem;color:#666;margin-top:.3rem;max-width:100%;">Contactez Mourad ou Fatima pour obtenir l'accès.</p>
+    </div>
+    <p id="login-err" style="color:#f87171;font-size:.85rem;display:none;">Mot de passe incorrect.</p>
+    <button class="btn btn-primary" onclick="tryLogin()" style="width:100%;margin-top:.5rem;">Se connecter</button>
+    <p style="margin-top:var(--s3);font-size:.8rem;color:#555;max-width:100%;">
+      <a href="index.html" style="color:#555;">← Retour au site</a>
+    </p>
+  </div>
+</div>
+
+<!-- DASHBOARD (caché jusqu'au login) -->
+<div id="dashboard" style="display:none; flex-direction:column; min-height:100vh;">
+
+  <!-- Topbar admin -->
+  <div class="admin-topbar">
+    <a href="index.html" class="logo" aria-label="BabyEL — Voir le site public">
+      <div class="logo-mark" aria-hidden="true">🍃</div>
+      <span class="logo-text">BabyEL Admin</span>
+    </a>
+    <nav aria-label="Navigation admin">
+      <a href="#stats">Statistiques</a>
+      <a href="#annonces">Annonces</a>
+      <a href="#forum">Forum</a>
+      <a href="#contenu">Contenu</a>
+      <a href="index.html" target="_blank">Voir le site →</a>
+      <a href="#" onclick="logout()" style="color:#f87171;">Déconnexion</a>
+    </nav>
+  </div>
+
+  <div class="admin-main">
+    <h1 class="admin-h1">👋 Bonjour, Mourad &amp; Fatima !</h1>
+
+    <!-- STATS -->
+    <section id="stats" aria-labelledby="stats-h2">
+      <h2 style="color:#888;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--s2);font-family:var(--font-body);" id="stats-h2">Vue d'ensemble</h2>
+      <div class="admin-grid">
+        <div class="stat-card">
+          <span class="stat-num" id="stat-annonces">0</span>
+          <span class="stat-lbl">Annonces publiées</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="stat-forum">0</span>
+          <span class="stat-lbl">Posts forum</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">🇧🇪 🇫🇷</span>
+          <span class="stat-lbl">Pays actifs</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" style="font-size:1.5rem;">En ligne ✓</span>
+          <span class="stat-lbl">Statut du site</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANNONCES -->
+    <section id="annonces" aria-labelledby="ann-h2">
+      <div class="admin-panel">
+        <h2 id="ann-h2">📦 Gestion des annonces</h2>
+        <div id="annonces-list">
+          <p style="color:#666;font-size:.9rem;">Aucune annonce pour l'instant. Les annonces publiées par les parents apparaîtront ici.</p>
+        </div>
+        <div style="margin-top:var(--s3);">
+          <button class="btn-admin btn-a-red" onclick="clearAnnonces()">🗑️ Effacer toutes les annonces (test)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORUM -->
+    <section id="forum" aria-labelledby="forum-h2">
+      <div class="admin-panel">
+        <h2 id="forum-h2">💬 Modération du forum</h2>
+        <p style="color:#666;font-size:.9rem;">Les nouveaux messages soumis par les parents apparaîtront ici pour validation avant publication.</p>
+        <div id="forum-list" style="margin-top:var(--s2);">
+          <p style="color:#555;font-size:.85rem;">Aucun message en attente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENU ÉDITORIAL -->
+    <section id="contenu" aria-labelledby="contenu-h2">
+      <div class="admin-panel">
+        <h2 id="contenu-h2">✏️ Modifier le contenu du site</h2>
+        <p style="color:#888;font-size:.88rem;margin-bottom:var(--s3);">
+          Ces champs vous permettent de mettre à jour les textes clés du site sans toucher au code.
+          <br/><em style="color:#555;">Note : dans cette version statique, les modifications s'affichent ici mais doivent être reportées dans le HTML. Une version avec backend permettra la modification en temps réel.</em>
+        </p>
+
+        <div class="form-group">
+          <label style="color:#aaa;" for="edit-hero-title">Titre principal (hero)</label>
+          <input class="edit-field" id="edit-hero-title" type="text"
+            value="Les articles bébé voyagent, vos économies restent."/>
+        </div>
+        <div class="form-group">
+          <label style="color:#aaa;" for="edit-hero-sub">Sous-titre hero</label>
+          <textarea class="edit-field" id="edit-hero-sub" rows="3">BabyEL est une plateforme solidaire où les parents publient et trouvent des lots d'articles bébé d'occasion — vêtements, mobilier, jouets, puériculture.</textarea>
+        </div>
+        <div class="form-group">
+          <label style="color:#aaa;" for="edit-contact-email">E-mail de contact affiché</label>
+          <input class="edit-field" id="edit-contact-email" type="email" value="contact@babyel.be"/>
+        </div>
+        <div class="form-group">
+          <label style="color:#aaa;" for="edit-eco-msg">Message éco-responsable (footer)</label>
+          <input class="edit-field" id="edit-eco-msg" type="text" value="🌿 Chaque échange est un geste pour la planète"/>
+        </div>
+        <button class="btn-admin btn-a-green" onclick="saveContent()">💾 Sauvegarder les modifications</button>
+        <p id="save-msg" style="color:var(--green-light);font-size:.82rem;margin-top:.5rem;display:none;">✓ Sauvegardé localement.</p>
+      </div>
+    </section>
+
+    <!-- LIENS RAPIDES ADMIN -->
+    <section aria-label="Actions rapides">
+      <div class="admin-panel">
+        <h2>⚡ Actions rapides</h2>
+        <div style="display:flex;gap:var(--s2);flex-wrap:wrap;">
+          <a href="publier.html" class="btn-admin btn-a-green" target="_blank">📝 Tester le formulaire annonce</a>
+          <a href="forum.html"   class="btn-admin btn-a-orange" target="_blank">💬 Voir le forum</a>
+          <a href="annonces.html" class="btn-admin btn-a-green" target="_blank">🛒 Voir les annonces</a>
+          <a href="contact.html" class="btn-admin btn-a-green" target="_blank">✉️ Page contact</a>
+          <a href="apropos.html" class="btn-admin btn-a-green" target="_blank">📖 Page À propos</a>
+          <button class="btn-admin btn-a-red" onclick="if(confirm('Effacer toutes les données de test ?')){ localStorage.clear(); updateStats(); alert('Données effacées.'); }">🗑️ Réinitialiser données test</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div><!-- fin #dashboard -->
+
+<script>
+  // ── Mot de passe admin simple (à remplacer par auth serveur au lancement)
+  const ADMIN_PW = 'babyel2025'; // Changez ce mot de passe avant déploiement !
+  const ADMIN_KEY = 'babyel_admin_logged';
+
+  function tryLogin() {
+    const pw = document.getElementById('admin-pw').value;
+    if (pw === ADMIN_PW) {
+      sessionStorage.setItem(ADMIN_KEY, '1');
+      showDashboard();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+    }
+  }
+  document.getElementById('admin-pw').addEventListener('keypress', e => { if(e.key==='Enter') tryLogin(); });
+
+  function logout() {
+    sessionStorage.removeItem(ADMIN_KEY);
+    location.reload();
+  }
+
+  function showDashboard() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'flex';
+    updateStats();
+    renderAnnonces();
+  }
+
+  function updateStats() {
+    const annonces = JSON.parse(localStorage.getItem('babyel_annonces') || '[]');
+    document.getElementById('stat-annonces').textContent = annonces.length;
+    document.getElementById('stat-forum').textContent = '0';
+  }
+
+  function renderAnnonces() {
+    const annonces = JSON.parse(localStorage.getItem('babyel_annonces') || '[]');
+    const list = document.getElementById('annonces-list');
+    if (annonces.length === 0) {
+      list.innerHTML = '<p style="color:#666;font-size:.9rem;">Aucune annonce pour l\'instant.</p>';
+      return;
+    }
+    list.innerHTML = `
+      <table class="admin-table" aria-label="Liste des annonces">
+        <thead><tr>
+          <th>Titre</th><th>Catégorie</th><th>Prix</th><th>Lieu</th><th>Date</th><th>Actions</th>
+        </tr></thead>
+        <tbody>
+          ${annonces.map((a,i) => `
+            <tr>
+              <td>${a.titre}</td>
+              <td>${a.categorie}</td>
+              <td><strong>${a.prix} €</strong></td>
+              <td>${a.ville || ''}, ${a.pays || ''}</td>
+              <td>${new Date(a.date).toLocaleDateString('fr-BE')}</td>
+              <td style="display:flex;gap:.4rem;flex-wrap:wrap;">
+                <button class="btn-admin btn-a-red" onclick="deleteAnnonce(${i})" aria-label="Supprimer l'annonce ${a.titre}">🗑️</button>
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function deleteAnnonce(idx) {
+    if (!confirm('Supprimer cette annonce ?')) return;
+    const a = JSON.parse(localStorage.getItem('babyel_annonces') || '[]');
+    a.splice(idx, 1);
+    localStorage.setItem('babyel_annonces', JSON.stringify(a));
+    updateStats(); renderAnnonces();
+  }
+
+  function clearAnnonces() {
+    if (!confirm('Effacer TOUTES les annonces ?')) return;
+    localStorage.removeItem('babyel_annonces');
+    updateStats(); renderAnnonces();
+  }
+
+  function saveContent() {
+    const data = {
+      heroTitle: document.getElementById('edit-hero-title').value,
+      heroSub:   document.getElementById('edit-hero-sub').value,
+      email:     document.getElementById('edit-contact-email').value,
+      ecoMsg:    document.getElementById('edit-eco-msg').value,
+    };
+    localStorage.setItem('babyel_content', JSON.stringify(data));
+    const msg = document.getElementById('save-msg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 3000);
+  }
+
+  // Charger contenu sauvegardé
+  function loadContent() {
+    const data = JSON.parse(localStorage.getItem('babyel_content') || '{}');
+    if (data.heroTitle) document.getElementById('edit-hero-title').value = data.heroTitle;
+    if (data.heroSub)   document.getElementById('edit-hero-sub').value   = data.heroSub;
+    if (data.email)     document.getElementById('edit-contact-email').value = data.email;
+    if (data.ecoMsg)    document.getElementById('edit-eco-msg').value    = data.ecoMsg;
+  }
+
+  // Auto-login si session active
+  if (sessionStorage.getItem(ADMIN_KEY) === '1') {
+    showDashboard();
+    loadContent();
+  }
+</script>
+</body>
+</html>

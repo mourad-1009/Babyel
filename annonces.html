@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Toutes les annonces BabyEL — Articles bébé d'occasion entre parents, en Belgique et en France."/>
+  <title>Annonces — BabyEL</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<div class="quick-links" role="navigation" aria-label="Raccourcis rapides">
+  <a href="index.html"    class="quick-link">🏠 Accueil</a>
+  <a href="publier.html"  class="quick-link">📸 Publier une annonce</a>
+  <a href="forum.html"    class="quick-link">💬 Forum</a>
+  <a href="contact.html"  class="quick-link">✉️ Contact</a>
+</div>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="BabyEL — Retour à l'accueil">
+      <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+      <span class="logo-text">BabyEL</span>
+    </a>
+    <button class="burger-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="annonces.html" class="active" aria-current="page">Annonces</a>
+      <a href="forum.html">Forum</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="publier.html" class="btn-nav">+ Publier</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <ol>
+    <li><a href="index.html">Accueil</a></li>
+    <li><span aria-current="page">Annonces</span></li>
+  </ol>
+</nav>
+
+<main id="main-content">
+
+  <div class="page-header">
+    <h1>Toutes les annonces</h1>
+    <p>Articles bébé d'occasion, publiés par des parents en Belgique et en France.</p>
+  </div>
+
+  <section style="padding: var(--s5) var(--s3); background: var(--sand);">
+    <div class="container">
+
+      <!-- FILTRES -->
+      <div class="filter-bar" role="search" aria-label="Filtrer les annonces">
+        <div class="form-group" style="flex:2; min-width:200px;">
+          <label for="f-search">Rechercher</label>
+          <input type="search" id="f-search" name="q" placeholder="ex : bodys 3 mois, poussette…" aria-label="Rechercher dans les annonces"/>
+        </div>
+        <div class="form-group">
+          <label for="f-cat">Catégorie</label>
+          <select id="f-cat" name="cat">
+            <option value="">Toutes</option>
+            <option>Vêtements</option>
+            <option>Mobilier</option>
+            <option>Jeux &amp; Éveil</option>
+            <option>Transport</option>
+            <option>Alimentation</option>
+            <option>Bain &amp; Hygiène</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-age">Âge</label>
+          <select id="f-age" name="age">
+            <option value="">Tous</option>
+            <option>0–3 mois</option>
+            <option>3–6 mois</option>
+            <option>6–12 mois</option>
+            <option>1–2 ans</option>
+            <option>2–3 ans</option>
+            <option>3 ans +</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-pays">Pays</label>
+          <select id="f-pays" name="pays">
+            <option value="">Belgique &amp; France</option>
+            <option>🇧🇪 Belgique</option>
+            <option>🇫🇷 France</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-prix">Prix max (€)</label>
+          <input type="number" id="f-prix" name="prix" min="1" max="999" placeholder="ex : 50" aria-describedby="prix-f-hint"/>
+          <p id="prix-f-hint" class="hint">Laisser vide = tous</p>
+        </div>
+        <div>
+          <button class="btn btn-primary" type="button" id="btn-filter" aria-label="Appliquer les filtres">Filtrer</button>
+        </div>
+      </div>
+
+      <!-- RÉSULTATS -->
+      <div id="results-count" aria-live="polite" aria-atomic="true" style="margin-bottom:var(--s3); color:var(--text-mid); font-size:.93rem;">
+        <strong id="count-num">0</strong> annonce(s) disponible(s)
+      </div>
+
+      <!-- GRILLE ANNONCES — vide au départ, remplie dynamiquement -->
+      <div id="annonces-grid" class="grid-4" role="list" aria-label="Liste des annonces" aria-live="polite"></div>
+
+      <!-- ÉTAT VIDE -->
+      <div id="empty-annonces" class="empty-state" role="status">
+        <div class="empty-icon" aria-hidden="true">🍃</div>
+        <h3>Aucune annonce pour l'instant</h3>
+        <p>
+          BabyEL vient de démarrer. Les premières annonces apparaîtront dès que des parents publieront leurs lots.
+          Soyez parmi les premiers à rejoindre la communauté !
+        </p>
+        <a href="publier.html" class="btn btn-primary" style="margin-top:.5rem;">
+          Publier la première annonce
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo"><img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/><span class="logo-text">BabyEL</span></a>
+      <p class="footer-desc">Plateforme éco-solidaire de revente d'articles bébé entre parents.<br>Fondée par Mourad El Melouli &amp; Fatima El Ouafi — Belgique.</p>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="annonces.html">Annonces</a></li><li><a href="forum.html">Forum</a></li><li><a href="apropos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Catégories</h4><ul><li><a href="annonces.html">Vêtements</a></li><li><a href="annonces.html">Mobilier</a></li><li><a href="annonces.html">Jeux &amp; Éveil</a></li><li><a href="annonces.html">Transport</a></li></ul></div>
+    <div class="footer-col"><h4>Légal</h4><ul><li><a href="contact.html#legal">Mentions légales</a></li><li><a href="contact.html#privacy">RGPD</a></li><li><a href="contact.html#cgu">CGU</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BabyEL — Mourad El Melouli &amp; Fatima El Ouafi</p>
+    <p class="footer-eco">🌿 Chaque échange est un geste pour la planète</p>
+  </div>
+</footer>
+
+<script>
+  const burger = document.querySelector('.burger-btn');
+  const nav    = document.getElementById('main-nav');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+
+  // ── Système d'annonces dynamique
+  // Les annonces seront stockées dans localStorage jusqu'à l'intégration d'un vrai backend.
+  // Structure d'une annonce :
+  // { id, titre, categorie, age, etat, prix, pays, ville, description, prenom, date }
+
+  const STORAGE_KEY = 'babyel_annonces';
+
+  function loadAnnonces() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function etatLabel(etat) {
+    const map = { neuf:'Neuf avec étiquette', tbe:'Très bon état', be:'Bon état', usage:'Bon état / usage visible' };
+    return map[etat] || etat;
+  }
+  function etatClass(etat) {
+    return 'etat-' + (etat || 'be');
+  }
+
+  function renderCard(a) {
+    return `
+      <article class="card-annonce" role="listitem" aria-label="Annonce : ${a.titre}">
+        <div class="card-img-placeholder" aria-hidden="true">📦</div>
+        <div class="card-body">
+          <span class="card-tag">${a.categorie}</span>
+          <h2 class="card-title">${a.titre}</h2>
+          <p class="card-desc">${a.description?.substring(0,100)}${a.description?.length > 100 ? '…' : ''}</p>
+          <p class="card-loc">📍 ${a.ville || ''} · ${a.pays || 'Belgique'}</p>
+          <div class="card-footer">
+            <span class="card-price">${a.prix} €</span>
+            <span class="card-etat ${etatClass(a.etat)}">${etatLabel(a.etat)}</span>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderAll() {
+    const annonces = loadAnnonces();
+    const grid  = document.getElementById('annonces-grid');
+    const empty = document.getElementById('empty-annonces');
+    const count = document.getElementById('count-num');
+
+    // Filtres
+    const q     = document.getElementById('f-search').value.toLowerCase();
+    const cat   = document.getElementById('f-cat').value;
+    const age   = document.getElementById('f-age').value;
+    const pays  = document.getElementById('f-pays').value;
+    const prix  = parseFloat(document.getElementById('f-prix').value);
+
+    const filtered = annonces.filter(a => {
+      if (q   && !a.titre?.toLowerCase().includes(q) && !a.description?.toLowerCase().includes(q)) return false;
+      if (cat && a.categorie !== cat) return false;
+      if (age && a.age !== age) return false;
+      if (pays && a.pays !== pays) return false;
+      if (!isNaN(prix) && parseFloat(a.prix) > prix) return false;
+      return true;
+    });
+
+    count.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      grid.innerHTML  = '';
+      empty.style.display = 'flex';
+    } else {
+      grid.innerHTML  = filtered.map(renderCard).join('');
+      empty.style.display = 'none';
+    }
+  }
+
+  document.getElementById('btn-filter').addEventListener('click', renderAll);
+  document.getElementById('f-search').addEventListener('input', renderAll);
+
+  // Écouter les nouvelles annonces publiées depuis publier.html
+  window.addEventListener('storage', e => { if (e.key === STORAGE_KEY) renderAll(); });
+
+  renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="BabyEL — La plateforme éco-solidaire belge et française de revente d'articles bébé entre parents. Née de notre propre galère de jeunes parents."/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="BabyEL — Articles bébé d'occasion, entre parents"/>
+  <meta property="og:description" content="Plateforme solidaire, éco-responsable, 100% gratuite. Belgique & France."/>
+  <meta property="og:type" content="website"/>
+  <title>BabyEL — Articles bébé d'occasion | Belgique & France</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<!-- Bandeau admin (caché visiteurs, visible après login) -->
+<div class="admin-bar" id="adminBar" role="complementary" aria-label="Barre d'administration">
+  <span><span class="admin-badge">ADMIN</span> Bienvenue, Mourad &amp; Fatima</span>
+  <nav aria-label="Raccourcis admin">
+    <a href="admin.html">🏠 Dashboard</a>
+    <a href="admin.html#annonces">📦 Annonces</a>
+    <a href="admin.html#forum">💬 Forum</a>
+    <a href="admin.html#contenu">✏️ Contenu</a>
+    <a href="admin.html#stats">📊 Stats</a>
+  </nav>
+  <button onclick="document.getElementById('adminBar').classList.remove('visible')" style="background:none;border:none;color:#888;cursor:pointer;font-size:1.1rem;" aria-label="Fermer la barre admin">✕</button>
+</div>
+
+<!-- Raccourcis rapides pour tous -->
+<div class="quick-links" role="navigation" aria-label="Raccourcis rapides">
+  <a href="annonces.html" class="quick-link">🛒 Voir les annonces</a>
+  <a href="publier.html"  class="quick-link">📸 Publier gratuitement</a>
+  <a href="forum.html"    class="quick-link">💬 Conseils parents</a>
+  <a href="apropos.html"  class="quick-link">🌿 Notre histoire</a>
+  <a href="contact.html"  class="quick-link">✉️ Contact</a>
+</div>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="BabyEL — Retour à l'accueil">
+      <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+      <span class="logo-text">BabyEL</span>
+    </a>
+    <button class="burger-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html" class="active" aria-current="page">Accueil</a>
+      <a href="annonces.html">Annonces</a>
+      <a href="forum.html">Forum</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="publier.html" class="btn-nav">+ Publier</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- ── HERO ── -->
+  <section class="hero" aria-labelledby="hero-h1">
+    <div class="hero-content container">
+        <img src="logo.png" alt="BabyEL — logo lapin" class="hero-logo"/>
+      <p class="hero-badge">🇧🇪 Belgique &amp; 🇫🇷 France · Éco-solidaire · 100 % gratuit</p>
+      <h1 id="hero-h1">
+        Les articles bébé voyagent,<br>
+        <em>vos économies restent.</em>
+      </h1>
+      <p class="lead">
+        BabyEL est une plateforme solidaire où les parents publient et trouvent des lots d'articles bébé d'occasion —
+        vêtements, mobilier, jouets, puériculture. Parce que les bébés grandissent vite, et les budgets pas toujours.
+      </p>
+      <div class="hero-actions">
+        <a href="annonces.html" class="btn btn-primary">Voir les annonces</a>
+        <a href="publier.html"  class="btn btn-secondary">Publier gratuitement</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMMENT ÇA MARCHE ── -->
+  <section style="background:var(--white);" aria-labelledby="how-h2">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="how-h2">Comment ça marche ?</h2>
+        <p>Simple, rapide, sans commission. En trois étapes.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">📸</div>
+          <h3>1. Publiez votre lot</h3>
+          <p>Décrivez vos articles, ajoutez vos photos, fixez votre prix. Gratuit, en moins de 5 minutes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">🔍</div>
+          <h3>2. Trouvez ce qu'il vous faut</h3>
+          <p>Parcourez les annonces par catégorie, âge, région. Contactez directement le parent vendeur.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">🤝</div>
+          <h3>3. Échangez entre parents</h3>
+          <p>Organisez la remise en main propre ou l'envoi. BabyEL met en relation, sans intermédiaire.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ANNONCES (état vide — aucune fausse annonce) ── -->
+  <section style="background:var(--sand);" aria-labelledby="annonces-h2">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="annonces-h2">Les dernières annonces</h2>
+        <p>Les premières annonces apparaîtront ici dès que des parents publieront leurs lots.</p>
+      </div>
+
+      <div class="empty-state" role="status" aria-live="polite">
+        <div class="empty-icon" aria-hidden="true">🍃</div>
+        <h3>Aucune annonce pour l'instant</h3>
+        <p>BabyEL est tout juste lancé. Soyez parmi les premiers parents à publier votre lot — et à faire partie de l'aventure depuis le début.</p>
+        <a href="publier.html" class="btn btn-primary" style="margin-top:.5rem;">Publier la première annonce</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NOTRE HISTOIRE (storytelling réel) ── -->
+  <section style="background:var(--white);" aria-labelledby="story-h2">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-visual" aria-hidden="true" role="img" aria-label="Illustration : deux parents et leur bébé">
+          👨‍👩‍👶<br/>
+          <span style="font-size:2rem;">🛍️ 💸 😅</span>
+        </div>
+        <div class="story-text">
+          <span class="eco-badge">🌿 Née d'une vraie galère</span>
+          <h2 id="story-h2" style="margin-top:1rem;">
+            De l'angoisse du premier bébé<br>à l'idée qui change tout
+          </h2>
+          <p>
+            En 2023, Mourad et Fatima attendaient leur premier enfant. Comme beaucoup de jeunes parents, 
+            ils ont rapidement réalisé que la liste de naissance ressemble davantage à un catalogue 
+            de luxe qu'à une liste de besoins réels.
+          </p>
+          <p>
+            <strong>Baignoire, table à langer, transat, body taille naissance, grenouillère taille 1 mois…</strong> 
+            Les achats s'enchaînaient. Les factures aussi. Et l'espace dans le salon, lui, disparaissait.
+          </p>
+          <p>
+            Quelques semaines après la naissance, la réalité les a frappés : la moitié des achats n'avaient 
+            servi que deux mois. Des centaines d'euros immobilisés dans du plastique et du coton que leur 
+            petite grandissait trop vite pour utiliser. Pendant ce temps, d'autres parents cherchaient 
+            exactement ces articles, sans savoir où les trouver à prix raisonnable.
+          </p>
+          <p>
+            C'est de cette frustration partagée — et d'une conviction profonde — qu'est née BabyEL : 
+            <strong>les articles bébé doivent circuler, pas finir à la poubelle.</strong>
+          </p>
+          <a href="apropos.html" class="btn btn-secondary" style="margin-top:.5rem;">Lire toute notre histoire</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ÉCO-ENGAGEMENT ── -->
+  <section style="background:var(--green-pale);" aria-labelledby="eco-h2">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="eco-h2">🌿 L'éco-responsabilité, au cœur de BabyEL</h2>
+        <p>Chaque lot vendu sur BabyEL, c'est un geste concret pour la planète que nos enfants vont hériter.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card" style="background:var(--white);">
+          <div class="card-icon" style="background:#D8F3DC;" aria-hidden="true">♻️</div>
+          <h3>Économie circulaire</h3>
+          <p>Un vêtement de bébé est porté en moyenne 3 à 6 mois. BabyEL lui offre une deuxième vie — et souvent une troisième.</p>
+        </div>
+        <div class="card" style="background:var(--white);">
+          <div class="card-icon" style="background:#D8F3DC;" aria-hidden="true">🌱</div>
+          <h3>Moins de production, moins de déchets</h3>
+          <p>Chaque achat d'occasion, c'est un article neuf de moins à fabriquer, transporter, emballer. Petit geste, grand impact.</p>
+        </div>
+        <div class="card" style="background:var(--white);">
+          <div class="card-icon" style="background:#D8F3DC;" aria-hidden="true">💚</div>
+          <h3>Solidarité concrète</h3>
+          <p>Mettre en relation des familles qui ont trop avec celles qui cherchent : c'est de l'écologie sociale, pas seulement environnementale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APERÇU FORUM ── -->
+  <section style="background:var(--sand);" aria-labelledby="forum-preview-h2">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="forum-preview-h2">💬 L'espace conseils parents</h2>
+        <p>Posez vos questions, partagez vos astuces. BabyEL, c'est aussi une communauté.</p>
+      </div>
+
+      <div class="empty-state" role="status">
+        <div class="empty-icon" aria-hidden="true">💬</div>
+        <h3>Le forum ouvre ses portes avec vous</h3>
+        <p>Les premières discussions apparaîtront dès que des parents commenceront à partager leurs conseils. Soyez le premier à briser la glace.</p>
+        <a href="forum.html" class="btn btn-primary" style="margin-top:.5rem;">Ouvrir le forum</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── POURQUOI NOUS ── -->
+  <section style="background:var(--white);" aria-labelledby="why-h2">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="why-h2">Pourquoi choisir BabyEL ?</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card" style="text-align:center; align-items:center;">
+          <div class="card-icon" style="margin:0 auto var(--s2);" aria-hidden="true">💶</div>
+          <h3>100 % gratuit</h3>
+          <p>Publier, contacter, parcourir. Aucune commission, jamais.</p>
+        </div>
+        <div class="card" style="text-align:center; align-items:center;">
+          <div class="card-icon" style="margin:0 auto var(--s2);" aria-hidden="true">🇧🇪</div>
+          <h3>Belge &amp; Français</h3>
+          <p>Ancré en Belgique, ouvert à la France. Proche de chez vous.</p>
+        </div>
+        <div class="card" style="text-align:center; align-items:center;">
+          <div class="card-icon" style="margin:0 auto var(--s2);" aria-hidden="true">🔒</div>
+          <h3>Confidentiel</h3>
+          <p>Vos données personnelles ne sont jamais vendues ni affichées publiquement.</p>
+        </div>
+        <div class="card" style="text-align:center; align-items:center;">
+          <div class="card-icon" style="margin:0 auto var(--s2);" aria-hidden="true">🤝</div>
+          <h3>Humain</h3>
+          <p>Fondé par des parents, pour des parents. On sait ce que vous vivez.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FINALE ── -->
+  <section class="cta-band" aria-labelledby="cta-h2">
+    <div class="container" style="max-width:700px; text-align:center;">
+      <h2 id="cta-h2">Prêt à rejoindre l'aventure&nbsp;?</h2>
+      <p>Publiez votre première annonce en moins de 5 minutes. C'est gratuit, solidaire, et ça fait vraiment du bien.</p>
+      <div class="hero-actions">
+        <a href="publier.html" class="btn btn-peach">Publier une annonce</a>
+        <a href="apropos.html" class="btn btn-secondary" style="border-color:white;color:white;">Notre histoire</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo" aria-label="BabyEL accueil">
+        <img src="logo-small.png" alt="" class="logo-img" aria-hidden="true"/>
+        <span class="logo-text">BabyEL</span>
+      </a>
+      <p class="footer-desc">Plateforme éco-solidaire de revente d'articles bébé entre parents.<br>Fondée par Mourad El Melouli &amp; Fatima El Ouafi — Belgique.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="annonces.html">Annonces</a></li>
+        <li><a href="forum.html">Forum conseils</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Catégories</h4>
+      <ul>
+        <li><a href="annonces.html?cat=vetements">Vêtements</a></li>
+        <li><a href="annonces.html?cat=mobilier">Mobilier</a></li>
+        <li><a href="annonces.html?cat=jeux">Jeux &amp; Éveil</a></li>
+        <li><a href="annonces.html?cat=transport">Transport</a></li>
+        <li><a href="annonces.html?cat=alimentation">Alimentation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <ul>
+        <li><a href="contact.html#legal">Mentions légales</a></li>
+        <li><a href="contact.html#privacy">Politique RGPD</a></li>
+        <li><a href="contact.html#cgu">CGU</a></li>
+        <li><a href="admin.html">Espace admin</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BabyEL — Mourad El Melouli &amp; Fatima El Ouafi</p>
+    <p class="footer-eco">🌿 Chaque échange est un geste pour la planète</p>
+  </div>
+</footer>
+
+<script>
+  // ── Menu burger
+  const burger = document.querySelector('.burger-btn');
+  const nav    = document.getElementById('main-nav');
+  burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.focus();
+    }
+  });
+
+  // ── Démo : activer la barre admin avec ?admin=1 dans l'URL
+  if (new URLSearchParams(location.search).get('admin') === '1') {
+    document.getElementById('adminBar').classList.add('visible');
+  }
+</script>
+</body>
+</html>
